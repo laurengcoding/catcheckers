@@ -1,0 +1,113 @@
+/* * {
+    box-sizing: border-box;
+    border: 1px solid limegreen; 
+} */
+
+
+body {
+    background-color: #F8DFD4;
+    height: auto;
+    margin: 0;
+}
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.playerTurn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -10px;
+    margin-left: -3px;
+}
+
+h1 {
+    font-family: 'Honk', system-ui;
+    font-size: 55px;
+    margin: 10px 0 0 0;
+}
+
+h2 {
+    font-family: 'Dokdo', system-ui;
+    font-size: 30px;
+    text-align: center;
+}
+
+.board {
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, fr);
+    border: solid 5px #694f3d;
+    border-radius: 5px;
+    box-shadow: 5px 5px 2.5px #b5a39b;
+}
+
+.squares {
+    height: 5vh;
+    width: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .jeffPiece, .brianPiece {
+    height: 4vh;
+    width: 4vh;
+    border: 2px solid black;
+    border-radius: 50%;
+} */
+
+img {
+    height: 7vh;
+}
+
+@media screen and (min-width: 814px) {
+    
+    .squares, .brianPiece, .jeffPiece {
+        height: 10vh;
+        width: 10vh;
+        /* TODO: fix img alignment */
+    }
+
+
+    img {
+        height: 13vh;
+
+    }
+
+    .brianPiece:hover, .jeffPiece:hover {
+        background-color: #8aa36553;
+    }
+
+    /* TODO: figure out how to get aside to appear on the right side
+    without impacting the position of board */
+    /* aside {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        justify-content: center;
+        align-content: center;
+        /* justify-self: flex-end;
+        align-self: flex-end; */
+    /* } */
+
+    /* .playerPointContainer {
+        height: 10vh;
+        width: 10vh;
+    } */
+}
+
+.grass {
+    background-color: #66794a;
+}
+
+.dirt {
+    background-color: #C69774;
+}
+

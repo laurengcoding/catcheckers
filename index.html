@@ -5,9 +5,159 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <script defer src="js/checkers.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dokdo&family=Honk&display=swap" rel="stylesheet">
     <title>Cat Checkers</title>
 </head>
 <body>
-    
+    <div class="container">
+        <header>
+            <h1>Checkers</h1>
+            <div class="playerTurn">
+                <img src="/img/brianface.png" alt="brian">
+                <h2>Turn</h2>
+            </div>
+        </header>
+
+        <main>
+            <section class="board">
+                <!-- row 0 -->
+                <div id="r0c0" class="squares grass">
+                    <img class="jeffPiece" src="/img/jeffcheck.png" alt="jeff">
+                </div>
+                <div class="squares dirt"></div>
+                <div id="r0c2" class="squares grass">
+                    <img class="jeffPiece" src="/img/jeffcheck.png" alt="jeff">
+                </div>
+                <div class="squares dirt"></div>
+                <div id="r0c4" class="squares grass">
+                    <img class="jeffPiece" src="/img/jeffcheck.png" alt="jeff">
+                </div>
+                <div class="squares dirt"></div>
+                <div id="r0c6" class="squares grass">
+                    <img class="jeffPiece" src="/img/jeffcheck.png" alt="jeff">
+                </div>
+                <div class="squares dirt"></div>
+                <!-- row 1 -->
+                <div class="squares dirt"></div>
+                <div id="r1c1" class="squares grass">
+                    <img class="jeffPiece" src="/img/jeffcheck.png" alt="jeff">
+                </div>
+                <div class="squares dirt"></div>
+                <div id="r1c3" class="squares grass">
+                    <img class="jeffPiece" src="/img/jeffcheck.png" alt="jeff">
+                </div>
+                <div class="squares dirt"></div>
+                <div id="r1c5" class="squares grass">
+                    <img class="jeffPiece" src="/img/jeffcheck.png" alt="jeff">
+                </div>
+                <div class="squares dirt"></div>
+                <div id="r1c7" class="squares grass">
+                    <img class="jeffPiece" src="/img/jeffcheck.png" alt="jeff">
+                </div>
+                <!-- row 2 -->
+                <div id="r2c0" class="squares grass">
+                    <img class="jeffPiece" src="/img/jeffcheck.png" alt="jeff">
+                </div>
+                <div class="squares dirt"></div>
+                <div id="r2c2" class="squares grass">
+                    <img class="jeffPiece" src="/img/jeffcheck.png" alt="jeff">
+                </div>
+                <div class="squares dirt"></div>
+                <div id="r2c4" class="squares grass">
+                    <img class="jeffPiece" src="/img/jeffcheck.png" alt="jeff">
+                </div>
+                <div class="squares dirt"></div>
+                <div id="r2c6" class="squares grass">
+                    <img class="jeffPiece" src="/img/jeffcheck.png" alt="jeff">
+                </div>
+                <div class="squares dirt"></div>
+                <!-- row 3 -->
+                <div class="squares dirt"></div>
+                <div id="r3c1" class="squares grass"></div>
+                <div class="squares dirt"></div>
+                <div id="r3c3" class="squares grass"></div>
+                <div class="squares dirt"></div>
+                <div id="r3c5" class="squares grass"></div>
+                <div class="squares dirt"></div>
+                <div id="r3c7" class="squares grass"></div>
+                <!-- row 4 -->
+                <div id="r4c0" class="squares grass"> </div>
+                <div class="squares dirt"></div>
+                <div id="r4c2" class="squares grass"></div>
+                <div class="squares dirt"></div>
+                <div id="r4c4" class="squares grass"></div>
+                <div class="squares dirt"></div>
+                <div id="r4c6" class="squares grass"></div>
+                <div class="squares dirt"></div>
+                <!-- row 5 -->
+                <div class="squares dirt"></div>
+                <div id="r5c1" class="squares grass">
+                <img class="brianPiece" src="/img/brianface.png" alt="brian">
+                </div>
+                <div class="squares dirt"></div>
+                <div id="r5c3" class="squares grass">
+                    <img class="brianPiece" src="/img/brianface.png" alt="brian">
+                </div>
+                <div class="squares dirt"></div>
+                <div id="r5c5" class="squares grass">
+                    <img class="brianPiece" src="/img/brianface.png" alt="brian">
+                </div>
+                <div class="squares dirt"></div>
+                <div id="r5c7" class="squares grass">
+                    <img class="brianPiece" src="/img/brianface.png" alt="brian">
+                </div>
+                <!-- row 6 -->
+                <div id="r6c0" class="squares grass">
+                    <img class="brianPiece" src="/img/brianface.png" alt="brian">
+                </div>
+                <div class="squares dirt"></div>
+                <div id="r6c2" class="squares grass">
+                    <img class="brianPiece" src="/img/brianface.png" alt="brian">
+                </div>
+                <div class="squares dirt"></div>
+                <div id="r6c4" class="squares grass">
+                    <img class="brianPiece" src="/img/brianface.png" alt="brian">
+                </div>
+                <div class="squares dirt"></div>
+                <div id="r6c6" class="squares grass">
+                    <img class="brianPiece" src="/img/brianface.png" alt="brian">
+                </div>
+                <div class="squares dirt"></div>
+                <!-- row 7 -->
+                <div class="squares dirt"></div>
+                <div id="r7c1" class="squares grass">
+                    <img class="brianPiece" src="/img/brianface.png" alt="brian">
+                </div>
+                <div class="squares dirt"></div>
+                <div id="r7c3" class="squares grass">
+                    <img class="brianPiece" src="/img/brianface.png" alt="brian">
+                </div>
+                <div class="squares dirt"></div>
+                <div id="r7c5" class="squares grass">
+                    <img class="brianPiece" src="/img/brianface.png" alt="brian">
+                </div>
+                <div class="squares dirt"></div>
+                <div  id="r7c7"class="squares grass">
+                    <img class="brianPiece" src="/img/brianface.png" alt="brian">
+                </div>
+
+            </section>
+            <aside>
+                <div id="jeffPoints" class="playerPointContainer">
+                    <!-- img of jeff piece with number layered over it to tally points -->
+
+                </div>
+                <div id="brianPoints" class="playerPointContainer">
+                    <!-- img of brian piece with number layered over it to tally points -->
+                </div>
+            </aside>
+
+            <!-- play again button -->
+        </main>
+
+
+    </div>
 </body>
 </html>
