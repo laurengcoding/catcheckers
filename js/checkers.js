@@ -71,14 +71,11 @@ function selectPiece(event) {
         // identify tile being clicked
     const targetParentDiv = event.target.parentNode;
     const cellId = targetParentDiv.id;
-
-    //console.log(targetParentDiv);
-    console.log(event.target);
-
  
     // access rows and columns
     const row = Number(cellId[1]);
     const column = Number(cellId[3]);
+
     // move up board
     const moveUpRow = row - 1;
     // move down board
@@ -93,7 +90,6 @@ function selectPiece(event) {
     topDiagonalLeft = 'r' + moveUpRow + 'c' + moveLeftColumn;
     topDiagonalRight = 'r' + moveUpRow + 'c' + moveRightColumn;
 
-    //console.log(topDiagonalLeft);
 
     // move towards bottom of board
     bottomDiagonalLeft = 'r' + moveDownRow + 'c' + moveLeftColumn;
@@ -131,6 +127,10 @@ function selectPiece(event) {
     };
 
     // if diagonal tiles have img do not style background color as blue
+    
+    if (createNewCat) {
+        event.target.style.display = 'none';
+    } else return;
 };
 
 function movePiece(event) {
@@ -140,9 +140,9 @@ function movePiece(event) {
 };
 
 // Function to create a new cat
-function createNewCat(location) {
-    console.log('trying to create a new cat');
-    // Create a new img element
+function createNewCat(location, callback) {
+    const cell = document.getElementById(location);
+    // console.log(cell);
     const newCat = document.createElement('img');
     // Set the src attribute to the cat image
     if (state.player === 'Brian') {
@@ -151,16 +151,14 @@ function createNewCat(location) {
         newCat.src = playerImg.jeff;
     } else return;
 
-    document.getElementById(location).appendChild(newCat);
+    cell.appendChild(newCat);
+    
     switchTurn();
     };
 
 
+
  
-
-
-
-
 
 function playerMoves() {
 // if getWinner === false
