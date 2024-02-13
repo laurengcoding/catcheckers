@@ -1,4 +1,8 @@
 	/*----- constants -----*/
+    const playerImg = {
+        brian: "img/brianface.png",
+        jeff: "img/jeffcheck.png"
+    };
 
 
 	/*----- state variables -----*/
@@ -10,7 +14,6 @@ const state = {
         playerJeff: 0
     },
     winner: false
-    // should there be state for playerPieces?
 };
 
 	/*----- cached elements  -----*/
@@ -34,8 +37,6 @@ brianPiece.forEach(function (brian) {
 init();
 
 function init() {
-    // should board be initialised as an object or 2D array?
-        //TODO: check with joel or CJ
     state.board = [
         ['jeff', 0, 'jeff', 0, 'jeff', 0, 'jeff', 0],   // row 0
         [0, 'jeff', 0, 'jeff', 0, 'jeff', 0, 'jeff'],   // row1
@@ -46,9 +47,7 @@ function init() {
         ['brian', 0, 'brian', 0, 'brian', 0, 'brian', 0], // row 6
         [0, 'brian', 0, 'brian', 0, 'brian', 0, 'brian']  // row 7
     ];
-   // console.log(state.board[0][0]);
 
-    
     state.player = 'Brian';
     state.totalPoints.playerBrian = 0;
     state.totalPoints.playerJeff = 0;
@@ -56,29 +55,78 @@ function init() {
 render();
 };
 
+// function buildBoard() {
+//     //two for loops - one for row one for column
+// }
+
 function selectPiece(event) {
-    const getParent = event.target.parentNode;
-    const cellId = getParent.id;
-    // console.log(cellId);
-    const row = cellId[1];
-    const column = cellId[3];
-    // this gives the html div of the grass tile clicked on:
-        // console.log(grassTiles[row]);
 
-   // event.target.style.backgroundColor = 'blue';
+        // identify tile being clicked
+    const targetParentDiv = event.target.parentNode;
+    const cellId = targetParentDiv.id;
 
-     // target the clicked piece, check row and column (cell value const?)
-    // if brian:
-        // check if selected row - 1 tile values = null
-            // and selected column -1 and/or +1 = 0
-        // then
-    // background colour of selected tile and two diagonally adjacent tiles change
+    console.log(targetParentDiv);
 
-    // if jeff:
-         // check if selected row + 1 tile values = 0
-        // and selected column -1 and/or +1 = 0
-        // background colour of selected tile and two diagonally adjacent tiles change
+ 
+    // access rows and columns
+    const row = Number(cellId[1]);
+    const column = Number(cellId[3]);
+    // move up board
+    const moveUpRow = row - 1;
+    // move down board
+    const moveDownRow = row + 1;
+
+    // move left
+    const moveLeftColumn = column - 1;
+    // move right
+    const moveRightColumn = column + 1;
+
+    // move towards top of board
+    const topDiagonalLeft = 'r' + moveUpRow + 'c' + moveLeftColumn;
+    const topDiagonalRight = 'r' + moveUpRow + 'c' + moveRightColumn;
+
+    // move towards bottom of board
+    const bottomDiagonalLeft = 'r' + moveDownRow + 'c' + moveLeftColumn;
+    const bottomDiagonalRight = 'r' + moveDownRow + 'c' + moveRightColumn;
+
+    // jump towards top of board
+    const topDiagonalLeftJump = 'r' + (moveUpRow - 1) + 'c' + (moveLeftColumn - 1);
+    const topDiagonalRightJump =  'r' + (moveUpRow - 1) + 'c' + (moveRightColumn + 1);
+
+    // jump towards bottom of board
+    const bottomDiagonalLeftJump = 'r' + (moveDownRow + 1) + 'c' + (moveLeftColumn - 1);
+    const bottomDiagonalRightJump = 'r' + (moveDownRow + 1) + 'c' + (moveRightColumn + 1);
+
+
+    if (targetParentDiv.classList.contains('brianPiece')) {
+        if (targetParentDiv.style.backgroundColor === 'blue') {
+            targetParentDiv.style.backgroundColor = '';
+            document.getElementById(topDiagonalLeft).style.backgroundColor = '';
+            document.getElementById(topDiagonalRight).style.backgroundColor = '';
+        } else {
+            targetParentDiv.style.backgroundColor = 'blue';
+            document.getElementById(topDiagonalLeft).style.backgroundColor = 'blue';
+            document.getElementById(topDiagonalRight).style.backgroundColor = 'blue';
+        };
+    } else if (targetParentDiv.classList.contains('jeffPiece')) {
+        if (targetParentDiv.style.backgroundColor === 'blue') {
+            targetParentDiv.style.backgroundColor = '';
+            document.getElementById(bottomDiagonalLeft).style.backgroundColor = '';
+            document.getElementById(bottomDiagonalRight).style.backgroundColor = '';
+        } else {
+            targetParentDiv.style.backgroundColor = 'blue';
+            document.getElementById(bottomDiagonalLeft).style.backgroundColor = 'blue';
+            document.getElementById(bottomDiagonalRight).style.backgroundColor = 'blue';
+        }
+    };
+
+    // if diagonal tiles have img do not style background color as blue
+
+    if (targetParentDiv.classList.contains('brianPiece')) {
+
+    }
 };
+
 
 function playerMoves() {
 // if getWinner === false
