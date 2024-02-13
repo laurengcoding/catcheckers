@@ -20,6 +20,10 @@ const state = {
 const grassTiles = document.querySelectorAll('.grass');
 const jeffPiece = document.querySelectorAll('.jeffPiece');
 const brianPiece = document.querySelectorAll('.brianPiece');
+let topDiagonalLeft;
+let topDiagonalRight;
+let bottomDiagonalLeft;
+let bottomDiagonalRight;
 
 
 	/*----- event listeners -----*/
@@ -31,6 +35,12 @@ jeffPiece.forEach(function (jeff) {
 
 brianPiece.forEach(function (brian) {
     brian.addEventListener('click', selectPiece);
+});
+
+grassTiles.forEach(function (tile) {
+    if (!tile.classList.contains('brianPiece') && !tile.classList.contains('jeffPiece')) {
+        tile.addEventListener('click', movePiece);
+    };
 });
 
 	/*----- functions -----*/
@@ -55,9 +65,6 @@ function init() {
 render();
 };
 
-// function buildBoard() {
-//     //two for loops - one for row one for column
-// }
 
 function selectPiece(event) {
 
@@ -65,7 +72,8 @@ function selectPiece(event) {
     const targetParentDiv = event.target.parentNode;
     const cellId = targetParentDiv.id;
 
-    console.log(targetParentDiv);
+    //console.log(targetParentDiv);
+    console.log(event.target);
 
  
     // access rows and columns
@@ -82,12 +90,14 @@ function selectPiece(event) {
     const moveRightColumn = column + 1;
 
     // move towards top of board
-    const topDiagonalLeft = 'r' + moveUpRow + 'c' + moveLeftColumn;
-    const topDiagonalRight = 'r' + moveUpRow + 'c' + moveRightColumn;
+    topDiagonalLeft = 'r' + moveUpRow + 'c' + moveLeftColumn;
+    topDiagonalRight = 'r' + moveUpRow + 'c' + moveRightColumn;
+
+    //console.log(topDiagonalLeft);
 
     // move towards bottom of board
-    const bottomDiagonalLeft = 'r' + moveDownRow + 'c' + moveLeftColumn;
-    const bottomDiagonalRight = 'r' + moveDownRow + 'c' + moveRightColumn;
+    bottomDiagonalLeft = 'r' + moveDownRow + 'c' + moveLeftColumn;
+    bottomDiagonalRight = 'r' + moveDownRow + 'c' + moveRightColumn;
 
     // jump towards top of board
     const topDiagonalLeftJump = 'r' + (moveUpRow - 1) + 'c' + (moveLeftColumn - 1);
@@ -121,11 +131,35 @@ function selectPiece(event) {
     };
 
     // if diagonal tiles have img do not style background color as blue
-
-    if (targetParentDiv.classList.contains('brianPiece')) {
-
-    }
 };
+
+function movePiece(event) {
+    console.log('Is this piece empty?');
+    createNewCat(event.target.id);
+
+};
+
+// Function to create a new cat
+function createNewCat(location) {
+    console.log('trying to create a new cat');
+    // Create a new img element
+    const newCat = document.createElement('img');
+    // Set the src attribute to the cat image
+    if (state.player === 'Brian') {
+        newCat.src = playerImg.brian;
+    } else if (state.player === 'Jeff') {
+        newCat.src = playerImg.jeff;
+    } else return;
+
+    document.getElementById(location).appendChild(newCat);
+    switchTurn();
+    };
+
+
+ 
+
+
+
 
 
 function playerMoves() {
@@ -148,7 +182,14 @@ function playerMoves() {
         // this could be checked by invoking function in first line of playerMoves
 
 function switchTurn() {
-
+    grassTiles.forEach(function(tile) {
+        tile.style.backgroundColor = '';
+    });
+    if (state.player === 'Brian') {
+        state.player = 'Jeff';
+    } else {
+        state.player = 'Brian'
+    }
 };
 
 function getWinner() {
