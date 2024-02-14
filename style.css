@@ -67,6 +67,10 @@ img {
     height: 7vh;
 }
 
+.jeffPiece {
+
+}
+
 @media screen and (min-width: 814px) {
     
     .squares, .brianPiece, .jeffPiece {
@@ -104,7 +108,9 @@ img {
 }
 
 .grass {
-    background-color: #66794a;
+    background-color: #66794a; 
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .dirt {
