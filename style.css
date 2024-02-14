@@ -121,6 +121,10 @@ img {
     background-image: url(img/jeffcheck.png);
 }
 
+.target {
+    background-color: blue;
+}
+
 .dirt {
     background-color: #C69774;
 }

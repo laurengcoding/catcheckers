@@ -25,10 +25,11 @@ const state = {
     /*----- cached elements  -----*/
 
 const elements = {
-    grassTiles: document.querySelectorAll('.grass'),
+    grassTiles: document.querySelectorAll('.grass'), //does this need to be an array for handleClick function
     jeffPiece: document.querySelectorAll('.jeff'),
     brianPiece: document.querySelectorAll('.brian')
 };
+
 
 
     /*----- event listeners -----*/
@@ -72,10 +73,11 @@ function render() {
 function handleClick(event) {
     // console.log('i have clicked')
     const square = event.target;
-    // console.log(square) - returns html div
+    console.log(square); // - returns html div
     const row = Number(square.id[1]);
     const column = Number(square.id[3]);
 
+    // console.log(square, column);
     const upperLeftId = 'r' + (row - 1) + 'c' + (column - 1);
     const upperLeftCell = document.getElementById(upperLeftId);
 
@@ -88,40 +90,87 @@ function handleClick(event) {
     const lowerRightId = 'r' + (row + 1) + 'c' + (column + 1);
     const lowerRightCell = document.getElementById(lowerRightId);
 
-// shows available squares to move to by blue background color
-    // on regular move
+    if (state.targets.includes(square.id)) {
+        state.board[row][column] = 'brian';
+        console.log('new ' + state.board[row][column] + ' has been created');
+        const oldRow = state.selected[1];
+        const oldColumn = state.selected[3];
+        state.board[oldRow][oldColumn] = 0;
+        if (state.board[oldRow][oldColumn] === 0) {
+            square.classList.remove('brian');
+        };
+       //  const deleteMovedCat = state.board[oldRow][oldColumn] = 0;
+        // deleteMovedCat.classList.remove('brian');
+        // console.log('old ' + deleteMovedCat + ' has been deleted?');
+        state.selected = 0;
+        state.targets = [];
+    } else if (state.selected === square.id) {
+        state.selected = 0;
+        state.targets = [];
+    } else if (state.board[row][column] === null) {
+        return;
+    } else {
+        state.selected = square.id;
+        state.targets = [upperLeftId, upperRightId];
+    }
 
-    if (square.classList.contains('brian')) {
+    render();
 
-        if (!upperLeftCell.classList.contains('brian') || 
-        !upperLeftCell.classList.contains('jeff') && !upperRightCell.classList.contains('brian') 
-        || !upperRightCell.classList.contains('jeff')) {
-            square.style.backgroundColor = 'blue';
-            upperLeftCell.style.backgroundColor = 'blue';
-            upperRightCell.style.backgroundColor = 'blue';
 
-        } else if (!upperLeftCell.classList.contains('brian') || 
-        !upperLeftCell.classList.contains('jeff')) {
-            square.style.backgroundColor = 'blue';
-            upperLeftCell.style.backgroundColor = 'blue';
 
-        } else if (!upperRightCell.classList.contains('brian') 
-        || !upperRightCell.classList.contains('jeff')) {
-            square.style.backgroundColor = 'blue';
-            upperRightCell.style.backgroundColor = 'blue';
-        } else return;
-    };
+// if (state.targets.includes(square.id)) {
+//     state.board[row][column] = 'cat';
+//     state.targets = [];
+//     const oldRow = state.selected[1];
+//     const oldColumn = state.selected[3];
+//     state.board[oldRow][oldColumn] = null;
+// } else if (state.selected === square.id) {
+//     state.selected = null;
+//     state.targets = [];
+// } else if (state.board[row][column] === null) {
+//     return;
+// } else {
+//     state.selected = square.id;
+//     state.targets = [
+//         upperLeftCell,
+//         upperRightCell
+//     ];
+// }
 
-    if (square.classList.contains('jeff')) {
-        square.style.backgroundColor = 'blue';
-        if (!lowerLeftCell.classList.contains('brian') && 
-        !lowerLeftCell.classList.contains('jeff') || !lowerRightCell.classList.contains('brian') 
-        || !lowerRightCell.classList.contains('jeff')) {
-            lowerLeftCell.style.backgroundColor = 'blue';
-            lowerRightCell.style.backgroundColor = 'blue';
-        } else return;
-    };
+    
 
+
+    // if (square.classList.contains('brian')) {
+
+    //     if (!upperLeftCell.classList.contains('brian') || 
+    //     !upperLeftCell.classList.contains('jeff') && !upperRightCell.classList.contains('brian') 
+    //     || !upperRightCell.classList.contains('jeff')) {
+    //         square.style.backgroundColor = 'blue';
+    //         upperLeftCell.style.backgroundColor = 'blue';
+    //         upperRightCell.style.backgroundColor = 'blue';
+
+    //     } else if (!upperLeftCell.classList.contains('brian') || 
+    //     !upperLeftCell.classList.contains('jeff')) {
+    //         square.style.backgroundColor = 'blue';
+    //         upperLeftCell.style.backgroundColor = 'blue';
+
+    //     } else if (!upperRightCell.classList.contains('brian') 
+    //     || !upperRightCell.classList.contains('jeff')) {
+    //         square.style.backgroundColor = 'blue';
+    //         upperRightCell.style.backgroundColor = 'blue';
+    //     } else return;
+    // };
+
+    // if (square.classList.contains('jeff')) {
+    //     square.style.backgroundColor = 'blue';
+    //     if (!lowerLeftCell.classList.contains('brian') && 
+    //     !lowerLeftCell.classList.contains('jeff') || !lowerRightCell.classList.contains('brian') 
+    //     || !lowerRightCell.classList.contains('jeff')) {
+    //         lowerLeftCell.style.backgroundColor = 'blue';
+    //         lowerRightCell.style.backgroundColor = 'blue';
+    //     } else return;
+    // };
+    render();
 };
 
 function renderBoard() {
