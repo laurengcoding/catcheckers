@@ -67,11 +67,13 @@ function init() {
    render();
 };
 
+
 function render() {
     renderBoard();
     renderControls();
     renderMessage();
 };
+
 
 function handleClick(event) {
     // console.log('i have clicked')
@@ -82,16 +84,27 @@ function handleClick(event) {
 
     // console.log(square, column);
     const upperLeftId = 'r' + (row - 1) + 'c' + (column - 1);
+    const upperLeftJumpId = 'r' + (row - 2) + 'c' + (column - 2);
     const upperLeftCell = document.getElementById(upperLeftId);
 
     const upperRightId = 'r' + (row - 1) + 'c' + (column + 1);
+    const upperRightJumpId = 'r' + (row - 2) + 'c' + (column + 2);
     const upperRightCell = document.getElementById(upperRightId);
 
+
     const lowerLeftId = 'r' + (row + 1) + 'c' + (column - 1);
+    const lowerLeftJumpId = 'r' + (row + 2) + 'c' + (column - 2);
     const lowerLeftCell = document.getElementById(lowerLeftId);
 
     const lowerRightId = 'r' + (row + 1) + 'c' + (column + 1);
+    const lowerRightJumpId = 'r' + (row + 2) + 'c' + (column + 2);
     const lowerRightCell = document.getElementById(lowerRightId);
+
+    // store the values of 'jumped cells'
+    const jumpedCellUpperLeft = upperLeftCell;
+    const jumpedCellUpperRight = upperRightCell;
+    const jumpedCellLowerLeft = lowerLeftCell;
+    const jumpedCellLowerRight = lowerRightCell;
 
     if (state.targets.includes(square.id)) {
         state.board[row][column] = state.player;
@@ -101,6 +114,7 @@ function handleClick(event) {
         state.board[oldRow][oldColumn] = 0;
         state.selected = 0;
         state.targets = [];
+        console.log('old one is gone');
         switchTurn();
     } else if (state.selected === square.id) {
         state.selected = 0;
@@ -114,10 +128,22 @@ function handleClick(event) {
 
         if (state.player === 'brian') {
         state.targets = [upperLeftId, upperRightId];
+        // // // successful jump!
+        // if (!upperLeftCell.classList.contains(state.player)) {
+        //      state.targets = [upperLeftJumpId, upperRightId];
+        //      if (state.targets[0]) {
+        //         jumpedCellUpperLeft.classList.remove('jeff');
+        //      } else if (!upperRightCell.classList.contains(state.player)) {
+        //         state.targets = [upperLeftId, upperRightJumpId];
+        //         if (state.targets[1]) {
+        //             jumpedCellUpperRight.classList.remove('jeff');
+        //         }
+        //      } else return;
 
         } else {
             state.targets = [lowerLeftId, lowerRightId];
         }
+
     };
     render();
 
@@ -183,4 +209,16 @@ function renderControls() {
 
 function renderMessage() {
 
+
+};
+
+function switchTurn() {
+    // elements.grassTiles.forEach(function(tile) {
+    //     tile.style.backgroundColor = '';
+    // });
+    if (state.player === 'brian') {
+        state.player = 'jeff';
+    } else {
+        state.player = 'brian';
+    }
 };
