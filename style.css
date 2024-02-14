@@ -67,9 +67,6 @@ img {
     height: 7vh;
 }
 
-.jeffPiece {
-
-}
 
 @media screen and (min-width: 814px) {
     
@@ -85,9 +82,10 @@ img {
 
     }
 
-    .brianPiece:hover, .jeffPiece:hover {
+    .brian:hover, .jeff:hover {
         background-color: #8aa36553;
     }
+
 
     /* TODO: figure out how to get aside to appear on the right side
     without impacting the position of board */
@@ -120,6 +118,8 @@ img {
 .jeff {
     background-image: url(img/jeffcheck.png);
 }
+
+
 
 .target {
     background-color: blue;

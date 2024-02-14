@@ -62,7 +62,7 @@ function init() {
     state.totalPoints.playerBrian = 0;
     state.totalPoints.playerJeff = 0;
     state.selected = null;
-    state.targets = []
+    state.targets = [],
 
    render();
 };
@@ -81,6 +81,11 @@ function handleClick(event) {
     console.log(square); // - returns html div
     const row = Number(square.id[1]);
     const column = Number(square.id[3]);
+
+
+// attach movement direction to state.player instead of defining each movement
+
+
 
     // console.log(square, column);
     const upperLeftId = 'r' + (row - 1) + 'c' + (column - 1);
@@ -105,6 +110,27 @@ function handleClick(event) {
     const jumpedCellUpperRight = upperRightCell;
     const jumpedCellLowerLeft = lowerLeftCell;
     const jumpedCellLowerRight = lowerRightCell;
+
+
+   // // possible movements object, keys are left and right
+    // const movements = {
+    //     brian: {
+    //         left: ['r' + (row - 1) + 'c' + (column - 1), 'r' + (row + 1) + 'c' + (column - 1)],
+    //         right: ['r' + (row - 1) + 'c' + (column + 1), 'r' + (row + 1) + 'c' + (column + 1)]
+    //     },
+    //     jeff: {
+    //         left: ['r' + (row - 1) + 'c' + (column - 1), 'r' + (row + 1) + 'c' + (column - 1)],
+    //         right: ['r' + (row - 1) + 'c' + (column + 1), 'r' + (row + 1) + 'c' + (column + 1)]
+    //     }
+    // };
+    
+    // // Assign movements based on the current player
+    // if (state.player === 'brian') {
+    //     state.movements = movements.brian;
+    // } else if (state.player === 'jeff') {
+    //     state.movements = movements.jeff;
+    // };
+
 
     if (state.targets.includes(square.id)) {
         state.board[row][column] = state.player;
@@ -145,42 +171,29 @@ function handleClick(event) {
         }
 
     };
+
+
+    // if (square.classList.contains(state.player)) {
+    //             if (!upperLeftCell.classList.contains(state.player) || 
+    //     !upperLeftCell.classList.contains(state.player) && !upperRightCell.classList.contains(state.player) 
+    //     || !upperRightCell.classList.contains(state.player)) {
+    //         square.style.backgroundColor = '#8aa36553';
+    //         upperLeftCell.style.backgroundColor = '#8aa36553';
+    //         upperRightCell.style.backgroundColor = '#8aa36553';
+
+    //     } else if (!upperLeftCell.classList.contains(state.player) || 
+    //     !upperLeftCell.classList.contains(state.player)) {
+    //         square.style.backgroundColor = '#8aa36553';
+    //         upperLeftCell.style.backgroundColor = '#8aa36553';
+
+    //     } else if (!upperRightCell.classList.contains(state.player) 
+    //     || !upperRightCell.classList.contains(state.player)) {
+    //         square.style.backgroundColor = '#8aa36553';
+    //         upperRightCell.style.backgroundColor = '#8aa36553';
+    //     } else return;
+    // };
+
     render();
-
-    
-
-
-    // if (square.classList.contains('brian')) {
-
-    //     if (!upperLeftCell.classList.contains('brian') || 
-    //     !upperLeftCell.classList.contains('jeff') && !upperRightCell.classList.contains('brian') 
-    //     || !upperRightCell.classList.contains('jeff')) {
-    //         square.style.backgroundColor = 'blue';
-    //         upperLeftCell.style.backgroundColor = 'blue';
-    //         upperRightCell.style.backgroundColor = 'blue';
-
-    //     } else if (!upperLeftCell.classList.contains('brian') || 
-    //     !upperLeftCell.classList.contains('jeff')) {
-    //         square.style.backgroundColor = 'blue';
-    //         upperLeftCell.style.backgroundColor = 'blue';
-
-    //     } else if (!upperRightCell.classList.contains('brian') 
-    //     || !upperRightCell.classList.contains('jeff')) {
-    //         square.style.backgroundColor = 'blue';
-    //         upperRightCell.style.backgroundColor = 'blue';
-    //     } else return;
-    // };
-
-    // if (square.classList.contains('jeff')) {
-    //     square.style.backgroundColor = 'blue';
-    //     if (!lowerLeftCell.classList.contains('brian') && 
-    //     !lowerLeftCell.classList.contains('jeff') || !lowerRightCell.classList.contains('brian') 
-    //     || !lowerRightCell.classList.contains('jeff')) {
-    //         lowerLeftCell.style.backgroundColor = 'blue';
-    //         lowerRightCell.style.backgroundColor = 'blue';
-    //     } else return;
-    // };
-    // render();
 };
 
 function renderBoard() {
@@ -197,6 +210,12 @@ function renderBoard() {
             } else {
                 cellDiv && cellDiv.classList.remove('brian', 'jeff');
             };
+            // TODO: there has to be something i can add here to check
+                // if a piece has jumped, remove the opponent's classList
+                //const capturedPiece = 
+                // if (cellValue !== state.player && cellValue !== 0) {
+                    //
+                // }
 
         });
 
