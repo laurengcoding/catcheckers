@@ -27,8 +27,11 @@ const state = {
 const elements = {
     grassTiles: document.querySelectorAll('.grass'), //does this need to be an array for handleClick function
     jeffPiece: document.querySelectorAll('.jeff'),
-    brianPiece: document.querySelectorAll('.brian')
+    brianPiece: document.querySelectorAll('.brian'),
+    currentPlayer: document.querySelector('.currentPlayer')
 };
+
+
 
 
 
@@ -91,51 +94,32 @@ function handleClick(event) {
     const lowerRightCell = document.getElementById(lowerRightId);
 
     if (state.targets.includes(square.id)) {
-        state.board[row][column] = 'brian';
-        console.log('new ' + state.board[row][column] + ' has been created');
+        state.board[row][column] = state.player;
+        console.log('new ' + state.player + ' has been created');
         const oldRow = state.selected[1];
         const oldColumn = state.selected[3];
         state.board[oldRow][oldColumn] = 0;
-        if (state.board[oldRow][oldColumn] === 0) {
-            square.classList.remove('brian');
-        };
-       //  const deleteMovedCat = state.board[oldRow][oldColumn] = 0;
-        // deleteMovedCat.classList.remove('brian');
-        // console.log('old ' + deleteMovedCat + ' has been deleted?');
         state.selected = 0;
         state.targets = [];
+        switchTurn();
     } else if (state.selected === square.id) {
         state.selected = 0;
         state.targets = [];
-    } else if (state.board[row][column] === null) {
+
+    } else if (state.board[row][column] === 0 || state.board[row][column] !== state.player) {
         return;
+
     } else {
         state.selected = square.id;
+
+        if (state.player === 'brian') {
         state.targets = [upperLeftId, upperRightId];
-    }
 
+        } else {
+            state.targets = [lowerLeftId, lowerRightId];
+        }
+    };
     render();
-
-
-
-// if (state.targets.includes(square.id)) {
-//     state.board[row][column] = 'cat';
-//     state.targets = [];
-//     const oldRow = state.selected[1];
-//     const oldColumn = state.selected[3];
-//     state.board[oldRow][oldColumn] = null;
-// } else if (state.selected === square.id) {
-//     state.selected = null;
-//     state.targets = [];
-// } else if (state.board[row][column] === null) {
-//     return;
-// } else {
-//     state.selected = square.id;
-//     state.targets = [
-//         upperLeftCell,
-//         upperRightCell
-//     ];
-// }
 
     
 
@@ -170,7 +154,7 @@ function handleClick(event) {
     //         lowerRightCell.style.backgroundColor = 'blue';
     //     } else return;
     // };
-    render();
+    // render();
 };
 
 function renderBoard() {
@@ -184,6 +168,8 @@ function renderBoard() {
             // console.log(cellDiv); 
             if (cellValue) {
             cellDiv.classList.add(cellValue);
+            } else {
+                cellDiv && cellDiv.classList.remove('brian', 'jeff');
             };
 
         });
@@ -196,9 +182,5 @@ function renderControls() {
 };
 
 function renderMessage() {
-
-};
-
-function switchTurn() {
 
 };
