@@ -113,6 +113,14 @@ img {
     background-repeat: no-repeat;
 }
 
+.brian {
+    background-image: url(img/brianface.png);
+}
+
+.jeff {
+    background-image: url(img/jeffcheck.png);
+}
+
 .dirt {
     background-color: #C69774;
 }
