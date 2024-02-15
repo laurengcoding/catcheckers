@@ -14,7 +14,7 @@ Only **YOU** can settle the score.
 
 ## Game Images
 
-
+TBC
 
 
 ## Technologies Used
@@ -25,7 +25,8 @@ Only **YOU** can settle the score.
 * Photoshop
 
 ## Getting Started
-Here is a link to the [deadly game](https://laurengcoding.github.io/catcheckers/)
+Here is a link to the [deadly game with not a single bug](https://laurengcoding.github.io/catcheckers/)
+
 
 
 ## Next Steps
