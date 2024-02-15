@@ -56,13 +56,6 @@ h2 {
     align-items: center;
 }
 
-/* .jeffPiece, .brianPiece {
-    height: 4vh;
-    width: 4vh;
-    border: 2px solid black;
-    border-radius: 50%;
-} */
-
 img {
     height: 7vh;
 }
@@ -73,7 +66,6 @@ img {
     .squares, .brianPiece, .jeffPiece {
         height: 10vh;
         width: 10vh;
-        /* TODO: fix img alignment */
     }
 
 

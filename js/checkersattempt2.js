@@ -90,10 +90,8 @@ function identifyOpponent() {
     const opponentTargets = [];
     const opponent = state.player === 'brian' ? 'jeff' : 'brian';
     for (let i = 0; i < state.targets.length; i++) {
-//     if (state.targets[0][1] === !state.player || state.targets[1][3] === !state.player) {
-// console.log('occupied');
-   // }
       const target = state.targets[i];
+      console.log(state.targets);
       console.log(target);
       const row = Number(target[1]);
       const column = Number(target[3]);
@@ -101,21 +99,11 @@ function identifyOpponent() {
         if (state.board[row][column] === opponent) {
         console.log('opponent piece found at ', target);
        // state.targets.splice(i, 1);
-        state.targets[i] = '';
+        // state.targets[i] = '';
         const newTargets = findTargets(target, state.player === 'brian' ? -1 : 1);
-        // loop through new targets
-        // for (let j = 0; j < newTargets.length; j++) {
-        //     const newTarget = newTargets[j];
-        //     const row = Number(newTarget[1]);
-        //     const column = Number(newTarget[3]);
-        //     if (state.board[row][column]) {
-        //         newTargets.splice(j, 1);
-        //     }
-        // }
-        // delete any that are occupied
         opponentTargets.push(...newTargets);
+        };
     };
-};
 
     const validTargets = opponentTargets.filter(function(newTarget) {
         const row = Number(newTarget[1]);
@@ -126,82 +114,56 @@ function identifyOpponent() {
     return validTargets;
 };
 
+
 function handleClick(event) {
     // console.log('i have clicked')
     const square = event.target;
     console.log(square); // - returns html div
     const row = Number(square.id[1]);
     const column = Number(square.id[3]);
-    
-
-
-    // console.log(square, column);
-    const upperLeftId = 'r' + (row - 1) + 'c' + (column - 1);
-    const upperLeftJumpId = 'r' + (row - 2) + 'c' + (column - 2);
-    const upperLeftCell = document.getElementById(upperLeftId);
-
-    const upperRightId = 'r' + (row - 1) + 'c' + (column + 1);
-    const upperRightJumpId = 'r' + (row - 2) + 'c' + (column + 2);
-    const upperRightCell = document.getElementById(upperRightId);
-
-
-    const lowerLeftId = 'r' + (row + 1) + 'c' + (column - 1);
-    const lowerLeftJumpId = 'r' + (row + 2) + 'c' + (column - 2);
-    const lowerLeftCell = document.getElementById(lowerLeftId);
-
-    const lowerRightId = 'r' + (row + 1) + 'c' + (column + 1);
-    const lowerRightJumpId = 'r' + (row + 2) + 'c' + (column + 2);
-    const lowerRightCell = document.getElementById(lowerRightId);
-
-    // store the values of 'jumped cells'
-    const jumpedCellUpperLeft = upperLeftCell;
-    const jumpedCellUpperRight = upperRightCell;
-    const jumpedCellLowerLeft = lowerLeftCell;
-    const jumpedCellLowerRight = lowerRightCell;
 
     if (state.targets.includes(square.id)) {
+        console.log('test');
         state.board[row][column] = state.player;
-        console.log('new ' + state.player + ' has been created');
-        const oldRow = state.selected[1];
-        const oldColumn = state.selected[3];
-        state.board[oldRow][oldColumn] = 0;
+        if (state.selected !== null) {
+            const oldRow = state.selected[1];
+            const oldColumn = state.selected[3];
+            state.board[oldRow][oldColumn] = 0;
+        };
         // if (opponentPiece between selected and square.id) {remove opponentPiece}
-        state.selected = 0;
+        const opponentTarget = identifyOpponent();
+        console.log(opponentTarget);
+        if (!opponentTarget) {
+        opponentTarget.forEach(function(target) {
+            const opponentRow = Number(target[1]);
+            const opponentColumn = Number(target[3]);
+            state.board[opponentRow][opponentColumn] = 0;
+            state.targets[0].innerHTML = '';
+            console.log(target);
+            });
+        };
+        state.selected = null;
         state.targets = [];
-        console.log('old one is gone');
+        // console.log('old one is gone');
         switchTurn();
-    } else if (state.selected === square.id) {
-        state.selected = 0;
+        } else if (state.selected === square.id) {
+        state.selected = null;
         state.targets = [];
 
-    } else if (state.board[row][column] === 0 || state.board[row][column] !== state.player) {
+        } else if (state.board[row][column] === 0 || state.board[row][column] !== state.player) {
         return;
 
-    } else {
+        } else {
         state.selected = square.id;
 
         state.targets = findTargets(square.id, state.player === 'brian' ? -1 : 1);
         const opponentTargets = identifyOpponent();
         state.targets = [...state.targets, ...opponentTargets];
         console.log(state.targets);
-        // log below logs out the left target
-       // console.log('r' + Number(state.targets[0][1]) + 'c' + Number(state.targets[1][3]))
-        // console.log(state.targets[0], state.targets[1], state.targets.id);
-            // ^ tells me ids for targets
-           // const opponent = state.player === 'brian' ? 'jeff' : 'brian';
-            // if (state.board[row][column] === opponent) {
-            //   //  state.targets = findTargets(square.id, state.player === 'brian' ? -2 : 2);
-            //   // don't need to add two, call function twice
-            // }
-       //check if any of the targets belong to the opponent
-        // if so, find the new targets if the player were to jump over opponent
-
+        state.targets[0].innerHTML = '';
     }
     render();
-    };
-
-
-
+};
 
 
 function renderBoard() {
@@ -220,13 +182,9 @@ function renderBoard() {
             };
             if (cellDiv && state.targets.includes(cellId)) {
                 cellDiv.classList.add('target');
-            }
-            // TODO: there has to be something i can add here to check
-                // if a piece has jumped, remove the opponent's classList
-                //const capturedPiece = 
-                // if (cellValue !== state.player && cellValue !== 0) {
-                    //
-                // }
+            } else {
+                cellDiv && cellDiv.classList.remove('target');
+            };
 
 
         });
@@ -235,18 +193,15 @@ function renderBoard() {
 };
 
 function renderControls() {
-
+    elements.currentPlayer.src = state.player === 'brian' ? IMG.brian : IMG.jeff;
 };
 
 function renderMessage() {
-
+// i planned on doing this but you can't really win the game if you can't collect a piece lol
 
 };
 
 function switchTurn() {
-    // elements.grassTiles.forEach(function(tile) {
-    //     tile.style.backgroundColor = '';
-    // });
     if (state.player === 'brian') {
         state.player = 'jeff';
     } else {
