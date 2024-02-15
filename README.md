@@ -14,7 +14,7 @@ Only **YOU** can settle the score.
 
 ## Game Images
 
-![Image of board](https://imgur.com/yYCjV72)
+![Image of board](https://github.com/laurengcoding/catcheckers/blob/main/img/catcheckerspreview.png?raw=true)
 
 
 
