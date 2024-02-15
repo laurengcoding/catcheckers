@@ -14,7 +14,8 @@ Only **YOU** can settle the score.
 
 ## Game Images
 
-TBC
+![Image of board](http://img/catcheckerspreview.png)
+
 
 
 ## Technologies Used
