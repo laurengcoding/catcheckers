@@ -74,6 +74,17 @@ function render() {
     renderMessage();
 };
 
+// source: r4c3 (eg where the actual piece is)
+// direction: -1 (up screen), +1 (down screen)
+function findTargets(source, direction) {
+    const row = Number(source[1]);
+    const column = Number(source[3]);
+
+    return [
+        'r' + (row + direction) + 'c' + (column - 1),
+        'r' + (row + direction) + 'c' + (column + 1)
+    ]
+}
 
 function handleClick(event) {
     // console.log('i have clicked')
@@ -81,10 +92,7 @@ function handleClick(event) {
     console.log(square); // - returns html div
     const row = Number(square.id[1]);
     const column = Number(square.id[3]);
-
-
-// attach movement direction to state.player instead of defining each movement
-
+    
 
 
     // console.log(square, column);
@@ -111,27 +119,6 @@ function handleClick(event) {
     const jumpedCellLowerLeft = lowerLeftCell;
     const jumpedCellLowerRight = lowerRightCell;
 
-
-   // // possible movements object, keys are left and right
-    // const movements = {
-    //     brian: {
-    //         left: ['r' + (row - 1) + 'c' + (column - 1), 'r' + (row + 1) + 'c' + (column - 1)],
-    //         right: ['r' + (row - 1) + 'c' + (column + 1), 'r' + (row + 1) + 'c' + (column + 1)]
-    //     },
-    //     jeff: {
-    //         left: ['r' + (row - 1) + 'c' + (column - 1), 'r' + (row + 1) + 'c' + (column - 1)],
-    //         right: ['r' + (row - 1) + 'c' + (column + 1), 'r' + (row + 1) + 'c' + (column + 1)]
-    //     }
-    // };
-    
-    // // Assign movements based on the current player
-    // if (state.player === 'brian') {
-    //     state.movements = movements.brian;
-    // } else if (state.player === 'jeff') {
-    //     state.movements = movements.jeff;
-    // };
-
-
     if (state.targets.includes(square.id)) {
         state.board[row][column] = state.player;
         console.log('new ' + state.player + ' has been created');
@@ -151,50 +138,19 @@ function handleClick(event) {
 
     } else {
         state.selected = square.id;
+        state.targets = findTargets(square.id, state.player === 'brian' ? -1 : 1);
+       //check if any of the targets belong to the opponent
+        // if so, find the new targets if the player were to jump over opponent
+        
+        // if state.targets[0] || state.targets[1] === !state.player
 
-        if (state.player === 'brian') {
-        state.targets = [upperLeftId, upperRightId];
-        // // // successful jump!
-        // if (!upperLeftCell.classList.contains(state.player)) {
-        //      state.targets = [upperLeftJumpId, upperRightId];
-        //      if (state.targets[0]) {
-        //         jumpedCellUpperLeft.classList.remove('jeff');
-        //      } else if (!upperRightCell.classList.contains(state.player)) {
-        //         state.targets = [upperLeftId, upperRightJumpId];
-        //         if (state.targets[1]) {
-        //             jumpedCellUpperRight.classList.remove('jeff');
-        //         }
-        //      } else return;
-
-        } else {
-            state.targets = [lowerLeftId, lowerRightId];
-        }
-
+    }
+    render();
     };
 
 
-    // if (square.classList.contains(state.player)) {
-    //             if (!upperLeftCell.classList.contains(state.player) || 
-    //     !upperLeftCell.classList.contains(state.player) && !upperRightCell.classList.contains(state.player) 
-    //     || !upperRightCell.classList.contains(state.player)) {
-    //         square.style.backgroundColor = '#8aa36553';
-    //         upperLeftCell.style.backgroundColor = '#8aa36553';
-    //         upperRightCell.style.backgroundColor = '#8aa36553';
 
-    //     } else if (!upperLeftCell.classList.contains(state.player) || 
-    //     !upperLeftCell.classList.contains(state.player)) {
-    //         square.style.backgroundColor = '#8aa36553';
-    //         upperLeftCell.style.backgroundColor = '#8aa36553';
 
-    //     } else if (!upperRightCell.classList.contains(state.player) 
-    //     || !upperRightCell.classList.contains(state.player)) {
-    //         square.style.backgroundColor = '#8aa36553';
-    //         upperRightCell.style.backgroundColor = '#8aa36553';
-    //     } else return;
-    // };
-
-    render();
-};
 
 function renderBoard() {
     state.board.forEach(function(rowArr, rowIndex) {
@@ -216,6 +172,7 @@ function renderBoard() {
                 // if (cellValue !== state.player && cellValue !== 0) {
                     //
                 // }
+
 
         });
 
