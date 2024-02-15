@@ -86,16 +86,20 @@ function findTargets(source, direction) {
     ]
 };
 
-function identifyOpponent() {
+function identifyOpponent(target) {
 const opponent = state.player === 'brian' ? 'jeff' : 'brian';
 for (let i = 0; i < state.targets.length; i++) {
 //     if (state.targets[0][1] === !state.player || state.targets[1][3] === !state.player) {
 // console.log('occupied');
-    }
+   // }
+   const target = state.targets[i];
+   const row = Number(target[1]);
+   const column = Number(target[3]);
+
+   if (state.board[row][column] === opponent) {
+    console.log('opponent piece found at ', target);
+   }
 };
-
-    findTargets();
-
 };
 
 function handleClick(event) {
@@ -150,7 +154,9 @@ function handleClick(event) {
 
     } else {
         state.selected = square.id;
+
         state.targets = findTargets(square.id, state.player === 'brian' ? -1 : 1);
+        identifyOpponent(state.targets);
         // log below logs out the left target
        // console.log('r' + Number(state.targets[0][1]) + 'c' + Number(state.targets[1][3]))
         // console.log(state.targets[0], state.targets[1], state.targets.id);
@@ -160,7 +166,6 @@ function handleClick(event) {
             //   //  state.targets = findTargets(square.id, state.player === 'brian' ? -2 : 2);
             //   // don't need to add two, call function twice
             // }
-        
        //check if any of the targets belong to the opponent
         // if so, find the new targets if the player were to jump over opponent
 
