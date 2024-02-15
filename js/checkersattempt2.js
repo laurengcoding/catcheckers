@@ -25,9 +25,7 @@ const state = {
     /*----- cached elements  -----*/
 
 const elements = {
-    grassTiles: document.querySelectorAll('.grass'), //does this need to be an array for handleClick function
-    jeffPiece: document.querySelectorAll('.jeff'),
-    brianPiece: document.querySelectorAll('.brian'),
+    grassTiles: document.querySelectorAll('.grass'),
     currentPlayer: document.querySelector('.currentPlayer')
 };
 
@@ -123,43 +121,34 @@ function handleClick(event) {
     const column = Number(square.id[3]);
 
     if (state.targets.includes(square.id)) {
-        console.log('test');
         state.board[row][column] = state.player;
         if (state.selected !== null) {
             const oldRow = state.selected[1];
             const oldColumn = state.selected[3];
             state.board[oldRow][oldColumn] = 0;
         };
-        // if (opponentPiece between selected and square.id) {remove opponentPiece}
         const opponentTarget = identifyOpponent();
-        console.log(opponentTarget);
         if (opponentTarget) {
         opponentTarget.forEach(function(target) {
             const opponentRow = Number(target[1]);
             const opponentColumn = Number(target[3]);
             state.board[opponentRow][opponentColumn] = 0;
             state.targets[0].innerHTML = '';
-            console.log(target);
             });
         };
         state.selected = null;
         state.targets = [];
-        // console.log('old one is gone');
         switchTurn();
         } else if (state.selected === square.id) {
         state.selected = null;
         state.targets = [];
-
         } else if (state.board[row][column] === 0 || state.board[row][column] !== state.player) {
         return;
-
         } else {
         state.selected = square.id;
-
         state.targets = findTargets(square.id, state.player === 'brian' ? -1 : 1);
         const opponentTargets = identifyOpponent();
         state.targets = [...state.targets, ...opponentTargets];
-        console.log(state.targets);
         state.targets[0].innerHTML = '';
     }
     render();

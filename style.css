@@ -77,24 +77,6 @@ img {
     .brian:hover, .jeff:hover {
         background-color: #8aa36553;
     }
-
-
-    /* TODO: figure out how to get aside to appear on the right side
-    without impacting the position of board */
-    /* aside {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        justify-content: center;
-        align-content: center;
-        /* justify-self: flex-end;
-        align-self: flex-end; */
-    /* } */
-
-    /* .playerPointContainer {
-        height: 10vh;
-        width: 10vh;
-    } */
 }
 
 .grass {
@@ -114,7 +96,7 @@ img {
 
 
 .target {
-    background-color: blue;
+    background-color: #8aa36553;
 }
 
 .dirt {
