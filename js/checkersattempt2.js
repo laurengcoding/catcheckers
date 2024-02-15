@@ -133,7 +133,7 @@ function handleClick(event) {
         // if (opponentPiece between selected and square.id) {remove opponentPiece}
         const opponentTarget = identifyOpponent();
         console.log(opponentTarget);
-        if (!opponentTarget) {
+        if (opponentTarget) {
         opponentTarget.forEach(function(target) {
             const opponentRow = Number(target[1]);
             const opponentColumn = Number(target[3]);
