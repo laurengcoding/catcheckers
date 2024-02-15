@@ -25,7 +25,7 @@ Only **YOU** can settle the score.
 * Photoshop
 
 ## Getting Started
-
+Here is a link to the [deadly game](https://laurengcoding.github.io/catcheckers/)
 
 
 ## Next Steps
