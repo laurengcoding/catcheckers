@@ -45,7 +45,7 @@ Here is a link to the [deadly game with not a single bug](https://laurengcoding.
 
 ## Bonus Images
 Ruthless Predator 1
-[Jeff]()
+[Jeff](https://github.com/laurengcoding/catcheckers/blob/main/img/realjeff.PNG?raw=true)
 
 Ruthless Predator 2
 [Brian]()
